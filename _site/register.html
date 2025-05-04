@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Life - Регистрация</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Общие стили */
+        :root {
+            --primary: #ff6b81;
+            --secondary: #ff8e53;
+            --dark: #333;
+            --light: #fff;
+            --gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Логотип в шапке */
+        .auth-header {
+            padding: 25px 0;
+            background-color: var(--light);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 20px;
+            font-weight: 700;
+            margin-right: 12px;
+            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+        }
+        
+        .brand-name {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Основная форма */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 40px 20px;
+        }
+        
+        .auth-form {
+            background: var(--light);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 50px;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .auth-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .auth-title:after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 15px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255,107,129,0.2);
+            outline: none;
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--light);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+        }
+        
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255,107,129,0.4);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 15px;
+            color: #666;
+        }
+        
+        .auth-link {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Футер */
+        .footer {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            color: var(--light);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 576px) {
+            .auth-form {
+                padding: 30px;
+            }
+            
+            .auth-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="auth-header">
+        <div class="logo-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">BL</div>
+                <span class="brand-name">Beauty Life</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="auth-container">
+        <div class="auth-form">
+            <h2 class="auth-title">Регистрация</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" id="name" required placeholder="Ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="Ваш email">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" placeholder="Ваш телефон">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" required placeholder="Ваш пароль">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Подтвердите пароль</label>
+                    <input type="password" id="confirmPassword" required placeholder="Повторите пароль">
+                </div>
+                <button type="submit" class="auth-btn">Зарегистрироваться</button>
+                <div class="auth-footer">
+                    Уже есть аккаунт? <a href="login.html" class="auth-link">Войдите</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2023 Beauty Life. Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация хранилища, если оно пустое
+            if (!localStorage.getItem('beautyLifeUsers')) {
+                localStorage.setItem('beautyLifeUsers', JSON.stringify([]));
+            }
+
+            // Обработка формы регистрации
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Получаем данные из формы
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const phone = document.getElementById('phone').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                // Проверка совпадения паролей
+                if (password !== confirmPassword) {
+                    alert('Пароли не совпадают!');
+                    return;
+                }
+                
+                // Проверка минимальной длины пароля
+                if (password.length < 6) {
+                    alert('Пароль должен содержать минимум 6 символов!');
+                    return;
+                }
+                
+                // Получаем текущий список пользователей
+                const users = JSON.parse(localStorage.getItem('beautyLifeUsers'));
+                
+                // Проверяем, есть ли уже пользователь с таким email
+                const userExists = users.some(user => user.email === email);
+                if (userExists) {
+                    alert('Пользователь с таким email уже зарегистрирован!');
+                    return;
+                }
+                
+                // Создаем нового пользователя
+                const newUser = {
+                    id: Date.now(), // Уникальный ID на основе времени
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    password: password,
+                    regDate: new Date().toLocaleDateString('ru-RU'),
+                    appointments: []
+                };
+                
+                // Добавляем нового пользователя в массив
+                users.push(newUser);
+                
+                // Сохраняем обновленный массив пользователей
+                localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+                
+                // Сохраняем текущего пользователя
+                localStorage.setItem('currentUser', JSON.stringify({
+                    name: name,
+                    email: email,
+                    phone: phone
+                }));
+                
+                // Перенаправляем в личный кабинет
+                alert('Регистрация прошла успешно!');
+                window.location.href = 'cabinet.html';
+            });
+        });
+    </script>
+</body>
+</html>

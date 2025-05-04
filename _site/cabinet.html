@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Life - Личный кабинет</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff6b81;
+            --secondary: #ff8e53;
+            --dark: #333;
+            --light: #fff;
+            --gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+        }
+        
+        /* Хедер */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 20px;
+            font-weight: 700;
+            margin-right: 12px;
+            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+        }
+        
+        .brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--light);
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(255,107,129,0.2);
+        }
+        
+        .user-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Основное содержимое */
+        .cabinet-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 100px auto 50px;
+        }
+        
+        .user-section {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .user-info-card {
+            flex: 1;
+            background: var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .user-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 30px;
+            font-weight: bold;
+            margin-right: 25px;
+        }
+        
+        .user-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-email {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .info-label {
+            width: 120px;
+            color: #666;
+            font-size: 15px;
+        }
+        
+        .info-value {
+            font-weight: 500;
+        }
+        
+        .new-order-card {
+            flex: 1;
+            background: var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+        }
+        
+        .section-title {
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: var(--dark);
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .form-group select, 
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+        
+        .form-group select:focus, 
+        .form-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(255,107,129,0.2);
+            outline: none;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--light);
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,129,0.4);
+        }
+        
+        .btn-block {
+            width: 100%;
+        }
+        
+        .appointments-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: var(--light);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .appointments-table th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--light);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .appointments-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .appointments-table tr:nth-child(even) {
+            background-color: var(--gray);
+        }
+        
+        .status-confirmed {
+            color: #4CAF50;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            color: #FF9800;
+            font-weight: 600;
+        }
+        
+        .status-cancelled {
+            color: #F44336;
+            font-weight: 600;
+        }
+        
+        .cancel-btn {
+            background: #F44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .no-appointments {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        /* Футер */
+        footer {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            color: var(--light);
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-section p {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .user-section {
+                flex-direction: column;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с логотипом -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">BL</div>
+                <span class="brand-name">Beauty Life</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" id="logoutBtn" class="user-icon"><i class="fas fa-sign-out-alt"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="cabinet-container">
+        <!-- Кнопка возврата на главную -->
+        <div style="margin-bottom: 20px;">
+            <a href="index.html" class="btn" style="display: inline-flex; align-items: center;">
+                <i class="fas fa-arrow-left" style="margin-right: 8px;"></i> На главную
+            </a>
+        </div>
+
+        <div class="user-section">
+            <!-- Информация о пользователе -->
+            <div class="user-info-card">
+                <div class="user-header">
+                    <div class="user-avatar" id="userAvatar">JL</div>
+                    <div>
+                        <div class="user-name" id="userName">Иван Иванов</div>
+                        <div class="user-email" id="userEmail">ivan@example.com</div>
+                    </div>
+                </div>
+                
+                <div class="info-row">
+                    <div class="info-label">Телефон:</div>
+                    <div class="info-value" id="userPhone">+7 (999) 123-45-67</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Дата регистрации:</div>
+                    <div class="info-value" id="regDate">15.05.2023</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">Записей:</div>
+                    <div class="info-value" id="appointmentsCount">0</div>
+                </div>
+                
+                <button class="btn" id="editProfileBtn" style="margin-top: 30px;">
+                    <i class="fas fa-edit"></i> Редактировать профиль
+                </button>
+            </div>
+            
+            <!-- Форма новой записи -->
+            <div class="new-order-card">
+                <h3 class="section-title">Новая запись</h3>
+                <form id="newOrderForm">
+                    <div class="form-group">
+                        <label for="service">Услуга</label>
+                        <select id="service" required>
+                            <option value="">Выберите услугу</option>
+                            <option value="Женская стрижка">Женская стрижка</option>
+                            <option value="Мужская стрижка">Мужская стрижка</option>
+                            <option value="Окрашивание волос">Окрашивание волос</option>
+                            <option value="Мелирование">Мелирование</option>
+                            <option value="Классический маникюр">Классический маникюр</option>
+                            <option value="Аппаратный маникюр">Аппаратный маникюр</option>
+                            <option value="SPA-педикюр">SPA-педикюр</option>
+                            <option value="Чистка лица">Чистка лица</option>
+                            <option value="Массаж лица">Массаж лица</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderDate">Дата</label>
+                        <input type="date" id="orderDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderTime">Время</label>
+                        <select id="orderTime" required>
+                            <option value="">Выберите время</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comments">Комментарий</label>
+                        <input type="text" id="comments" placeholder="Ваши пожелания">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-block">
+                        <i class="fas fa-calendar-check"></i> Записаться
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Список записей -->
+        <div class="user-info-card">
+            <h3 class="section-title">Мои записи</h3>
+            <div id="appointmentsList">
+                <p class="no-appointments">У вас пока нет записей</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>О салоне</h3>
+                <p>Beauty Life - современный салон красоты с индивидуальным подходом к каждому клиенту.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Красивая, 15</p>
+                <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                <p><i class="fas fa-envelope"></i> info@beautylife.ru</p>
+            </div>
+            <div class="footer-section">
+                <h3>Часы работы</h3>
+                <p>Пн-Пт: 9:00 - 21:00</p>
+                <p>Сб-Вс: 10:00 - 20:00</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Beauty Life. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Заполняем данные пользователя
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userEmail').textContent = currentUser.email;
+            document.getElementById('userAvatar').textContent = currentUser.name.split(' ').map(n => n[0]).join('');
+            
+            if (currentUser.phone) {
+                document.getElementById('userPhone').textContent = currentUser.phone;
+            }
+            
+            if (currentUser.regDate) {
+                document.getElementById('regDate').textContent = currentUser.regDate;
+            } else {
+                // Устанавливаем дату регистрации, если ее нет
+                const today = new Date();
+                const formattedDate = `${today.getDate().toString().padStart(2, '0')}.${(today.getMonth()+1).toString().padStart(2, '0')}.${today.getFullYear()}`;
+                document.getElementById('regDate').textContent = formattedDate;
+                
+                // Сохраняем дату регистрации
+                currentUser.regDate = formattedDate;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                
+                // Обновляем в общем списке пользователей
+                const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
+                const userIndex = users.findIndex(u => u.email === currentUser.email);
+                if (userIndex !== -1) {
+                    users[userIndex].regDate = formattedDate;
+                    localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+                }
+            }
+            
+            // Загружаем записи
+            loadAppointments(currentUser.email);
+            
+            // Обработчик формы новой записи
+            document.getElementById('newOrderForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const service = document.getElementById('service').value;
+                const date = document.getElementById('orderDate').value;
+                const time = document.getElementById('orderTime').value;
+                const comments = document.getElementById('comments').value;
+                
+                if (!service || !date || !time) {
+                    alert('Пожалуйста, заполните все обязательные поля');
+                    return;
+                }
+                
+                // Форматируем дату
+                const formattedDate = new Date(date).toLocaleDateString('ru-RU');
+                const fullDate = `${formattedDate} ${time}`;
+                
+                // Определяем цену услуги
+                const servicePrices = {
+                    'Женская стрижка': '1 500 руб.',
+                    'Мужская стрижка': '800 руб.',
+                    'Окрашивание волос': '2 500 руб.',
+                    'Мелирование': '3 000 руб.',
+                    'Классический маникюр': '1 200 руб.',
+                    'Аппаратный маникюр': '1 500 руб.',
+                    'SPA-педикюр': '1 800 руб.',
+                    'Чистка лица': '2 000 руб.',
+                    'Массаж лица': '1 500 руб.'
+                };
+                
+                const price = servicePrices[service] || 'Договорная';
+                
+                // Добавляем запись
+                const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
+                const userIndex = users.findIndex(u => u.email === currentUser.email);
+                
+                if (userIndex !== -1) {
+                    if (!users[userIndex].appointments) {
+                        users[userIndex].appointments = [];
+                    }
+                    
+                    const newAppointment = {
+                        service: service,
+                        date: fullDate,
+                        price: price,
+                        status: 'Новый',
+                        comments: comments || ''
+                    };
+                    
+                    users[userIndex].appointments.push(newAppointment);
+                    localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+                    
+                    // Обновляем текущего пользователя
+                    currentUser.appointments = users[userIndex].appointments;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Очищаем форму
+                    document.getElementById('newOrderForm').reset();
+                    
+                    // Показываем уведомление
+                    alert(`Вы успешно записались на "${service}" на ${fullDate}`);
+                    
+                    // Обновляем список записей
+                    loadAppointments(currentUser.email);
+                }
+            });
+            
+            // Кнопка выхода
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm('Вы действительно хотите выйти?')) {
+                    localStorage.removeItem('currentUser');
+                    window.location.href = 'index.html';
+                }
+            });
+            
+            // Кнопка редактирования профиля
+            document.getElementById('editProfileBtn').addEventListener('click', function() {
+                const newPhone = prompt('Введите ваш телефон:', currentUser.phone || '');
+                if (newPhone !== null) {
+                    currentUser.phone = newPhone;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Обновляем в общем списке пользователей
+                    const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
+                    const userIndex = users.findIndex(u => u.email === currentUser.email);
+                    if (userIndex !== -1) {
+                        users[userIndex].phone = newPhone;
+                        localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+                    }
+                    
+                    document.getElementById('userPhone').textContent = newPhone;
+                    alert('Телефон успешно обновлен');
+                }
+            });
+        });
+        
+        function loadAppointments(userEmail) {
+            const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
+            const user = users.find(u => u.email === userEmail);
+            const appointmentsList = document.getElementById('appointmentsList');
+            
+            if (!user || !user.appointments || user.appointments.length === 0) {
+                appointmentsList.innerHTML = '<p class="no-appointments">У вас пока нет записей</p>';
+                document.getElementById('appointmentsCount').textContent = '0';
+                return;
+            }
+            
+            // Обновляем количество записей
+            document.getElementById('appointmentsCount').textContent = user.appointments.length;
+            
+            // Сортируем записи по дате (новые сначала)
+            const sortedAppointments = [...user.appointments].sort((a, b) => {
+                return new Date(b.date.split(' ')[0].split('.').reverse().join('-')) - 
+                       new Date(a.date.split(' ')[0].split('.').reverse().join('-'));
+            });
+            
+            let html = `
+                <table class="appointments-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th>Дата и время</th>
+                            <th>Стоимость</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            sortedAppointments.forEach((app, index) => {
+                const statusClass = `status-${app.status ? app.status.toLowerCase() : 'confirmed'}`;
+                
+                html += `
+                    <tr>
+                        <td>${app.service}</td>
+                        <td>${app.date}</td>
+                        <td>${app.price}</td>
+                        <td><span class="${statusClass}">${app.status || 'Подтверждено'}</span></td>
+                        <td>
+                            ${app.status === 'Новый' || !app.status ? `
+                                <button class="cancel-btn" data-index="${index}">Отменить</button>
+                            ` : ''}
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `
+                    </tbody>
+                </table>
+            `;
+            
+            appointmentsList.innerHTML = html;
+            
+            // Добавляем обработчики для кнопок отмены
+            document.querySelectorAll('.cancel-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.getAttribute('data-index'));
+                    cancelAppointment(userEmail, index);
+                });
+            });
+        }
+        
+        function cancelAppointment(userEmail, index) {
+            if (!confirm('Вы действительно хотите отменить эту запись?')) return;
+            
+            const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
+            const userIndex = users.findIndex(u => u.email === userEmail);
+            
+            if (userIndex !== -1 && users[userIndex].appointments && users[userIndex].appointments[index]) {
+                // Помечаем как отмененное
+                users[userIndex].appointments[index].status = 'Отменено';
+                localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+                
+                // Обновляем текущего пользователя
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser && currentUser.email === userEmail) {
+                    currentUser.appointments = users[userIndex].appointments;
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                }
+                
+                // Перезагружаем список
+                loadAppointments(userEmail);
+                alert('Запись успешно отменена');
+            }
+        }
+    </script>
+</body>
+</html>
