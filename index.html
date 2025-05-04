@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beauty Life - Салон красоты премиум-класса</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Основные стили */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary: #ff6b81;
+            --secondary: #ff8e53;
+            --dark: #333;
+            --light: #fff;
+            --gray: #f5f5f5;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        /* Шапка с логотипом */
+        header {
+            background-color: var(--light);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Стили для логотипа */
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.02);
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 20px;
+            font-weight: 700;
+            margin-right: 12px;
+            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+        }
+        
+        .brand-name {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Навигация */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav ul li a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            padding: 5px 0;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Иконка пользователя */
+        .user-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--light);
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(255,107,129,0.2);
+        }
+        
+        .user-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,107,129,0.3);
+        }
+        
+        /* Основное содержимое */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 100px auto 50px;
+        }
+        
+        /* Секции */
+        section {
+            padding: 80px 0;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 20px auto 0;
+            border-radius: 2px;
+        }
+        
+        /* Герой-секция */
+        .hero {
+            height: 600px;
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: -100px;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            color: var(--light);
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--light);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,107,129,0.4);
+        }
+        
+        /* Секция услуг */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 40px 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            border: 1px solid rgba(0,0,0,0.03);
+            text-align: center;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255,107,129,0.1);
+            border-color: var(--primary);
+        }
+        
+        .service-icon {
+            font-size: 50px;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .service-card ul {
+            list-style: none;
+            text-align: left;
+        }
+        
+        .service-card li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 25px;
+            font-size: 15px;
+        }
+        
+        .service-card li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 20px;
+            line-height: 1;
+        }
+        
+        /* Секция преимуществ */
+        .advantages {
+            background-color: var(--gray);
+        }
+        
+        .advantages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .advantage-card {
+            background: var(--light);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .advantage-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .advantage-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .advantage-card h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .advantage-card p {
+            color: #666;
+            font-size: 15px;
+        }
+        
+        /* Секция стоимости */
+        .price-section {
+            background: var(--light);
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.05);
+            padding: 50px;
+            margin: 60px 0;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        
+        .price-table th {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--light);
+            padding: 18px;
+            text-align: left;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .price-table td {
+            padding: 18px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            font-size: 15px;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background-color: var(--gray);
+        }
+        
+        .price-table tr:hover {
+            background-color: rgba(255,107,129,0.05);
+        }
+        
+        .price-highlight {
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 17px;
+        }
+        
+        /* Галерея */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            height: 280px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* Футер */
+        footer {
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            color: var(--light);
+            padding: 80px 0 30px;
+        }
+        
+        .footer-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            font-size: 16px;
+            font-weight: 700;
+            margin-right: 12px;
+        }
+        
+        .footer-brand {
+            font-size: 20px;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .footer-about p {
+            opacity: 0.7;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--light);
+            transition: all 0.3s;
+        }
+        
+        .footer-social a:hover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            color: var(--light);
+            font-size: 20px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer-links h3:after, .footer-contact h3:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--light);
+            padding-left: 5px;
+        }
+        
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.7;
+            font-size: 15px;
+        }
+        
+        .footer-contact i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            margin-top: 50px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            opacity: 0.7;
+            font-size: 14px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 15px 0;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            h2 {
+                font-size: 28px;
+                margin-bottom: 40px;
+            }
+            
+            .price-section {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с логотипом -->
+    <header>
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">BL</div>
+                <span class="brand-name">Beauty Life</span>
+            </a>
+            
+            <nav>
+                <ul>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#advantages">Преимущества</a></li>
+                    <li><a href="#price">Стоимость</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="cabinet.html" class="user-icon"><i class="fas fa-user"></i></a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Герой-секция -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Ваша красота - наша страсть</h1>
+            <p>Профессиональный уход и создание неповторимого образа в салоне Beauty Life</p>
+            <a href="#price" class="btn">Записаться онлайн</a>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- Секция услуг -->
+        <section id="services">
+            <h2>Наши услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-cut"></i></div>
+                    <h3>Парикмахерские услуги</h3>
+                    <ul>
+                        <li>Стрижки любой сложности</li>
+                        <li>Окрашивание волос</li>
+                        <li>Укладки и прически</li>
+                        <li>Лечение волос</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hand-sparkles"></i></div>
+                    <h3>Маникюр и педикюр</h3>
+                    <ul>
+                        <li>Классический маникюр</li>
+                        <li>Аппаратный маникюр</li>
+                        <li>Наращивание ногтей</li>
+                        <li>Дизайн ногтей</li>
+                    </ul>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-spa"></i></div>
+                    <h3>Косметология</h3>
+                    <ul>
+                        <li>Чистка лица</li>
+                        <li>Уходовые процедуры</li>
+                        <li>Массаж лица</li>
+                        <li>Пилинги</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция преимуществ -->
+        <section id="advantages" class="advantages">
+            <h2>Почему выбирают нас</h2>
+            <div class="advantages-grid">
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-award"></i></div>
+                    <h3>Профессионализм</h3>
+                    <p>Наши мастера регулярно проходят обучение и имеют международные сертификаты</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-gem"></i></div>
+                    <h3>Качество</h3>
+                    <p>Используем только профессиональные материалы премиум-класса</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-heart"></i></div>
+                    <h3>Индивидуальный подход</h3>
+                    <p>Для каждого клиента разрабатываем персональную программу ухода</p>
+                </div>
+                <div class="advantage-card">
+                    <div class="advantage-icon"><i class="fas fa-thumbs-up"></i></div>
+                    <h3>Гарантия результата</h3>
+                    <p>Мы уверены в качестве наших услуг и даем гарантию на все работы</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секция стоимости -->
+        <section id="price">
+            <h2>Стоимость услуг</h2>
+            <div class="price-section">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Услуга</th>
+                            <th>Описание</th>
+                            <th>Стоимость</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Женская стрижка</strong></td>
+                            <td>Стрижка с укладкой феном</td>
+                            <td><span class="price-highlight">1 500 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Мужская стрижка</strong></td>
+                            <td>Стрижка машинкой и ножницами</td>
+                            <td><span class="price-highlight">800 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Окрашивание волос</strong></td>
+                            <td>Окрашивание в один тон</td>
+                            <td><span class="price-highlight">2 500 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Мелирование</strong></td>
+                            <td>Частичное мелирование</td>
+                            <td><span class="price-highlight">3 000 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Классический маникюр</strong></td>
+                            <td>Обрезной маникюр с покрытием</td>
+                            <td><span class="price-highlight">1 200 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Аппаратный маникюр</strong></td>
+                            <td>Маникюр с использованием аппарата</td>
+                            <td><span class="price-highlight">1 500 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>SPA-педикюр</strong></td>
+                            <td>Комплексный уход за стопами</td>
+                            <td><span class="price-highlight">1 800 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Чистка лица</strong></td>
+                            <td>Комплексная чистка лица</td>
+                            <td><span class="price-highlight">2 000 руб.</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Массаж лица</strong></td>
+                            <td>Омолаживающий массаж</td>
+                            <td><span class="price-highlight">1 500 руб.</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Галерея -->
+        <section id="gallery">
+            <h2>Наши работы</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery1.jpg" alt="Пример стрижки">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery2.jpg" alt="Пример окрашивания">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery3.jpg" alt="Пример маникюра">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery4.jpg" alt="Пример косметологии">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon">BL</div>
+                    <div class="footer-brand">Beauty Life</div>
+                </div>
+                <p>Салон красоты премиум-класса, где каждый клиент получает индивидуальный подход и высокий уровень сервиса.</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-vk"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Разделы</h3>
+                <ul>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#advantages">Преимущества</a></li>
+                    <li><a href="#price">Стоимость</a></li>
+                    <li><a href="#gallery">Галерея</a></li>
+                    <li><a href="cabinet.html">Личный кабинет</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-map-marker-alt"></i> г. Красноярск, ул. Красивая, 15</p>
+                <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
+                <p><i class="fas fa-envelope"></i> info@beautylife.ru</p>
+                <p><i class="fas fa-clock"></i> Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 Beauty Life. Все права защищены.</p>
+        </div>
+    </footer>
+</body>
+</html>
