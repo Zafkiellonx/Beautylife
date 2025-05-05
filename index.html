@@ -763,39 +763,48 @@
             <div class="footer-about">
                 <div class="footer-logo">
                     <div class="footer-logo-icon">BL</div>
-                    <div class="footer-brand">Beauty Life</div>
+                    <div class="footer-brand" id="footerOrgName">Beauty Life</div>
                 </div>
-                <p>Салон красоты премиум-класса, где каждый клиент получает индивидуальный подход и высокий уровень сервиса.</p>
-                <div class="footer-social">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-vk"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                </div>
+                <p id="footerAbout">Салон красоты премиум-класса с индивидуальным подходом к каждому клиенту.</p>
             </div>
-            
-            <div class="footer-links">
-                <h3>Разделы</h3>
-                <ul>
-                    <li><a href="#services">Услуги</a></li>
-                    <li><a href="#advantages">Преимущества</a></li>
-                    <li><a href="#price">Стоимость</a></li>
-                    <li><a href="#gallery">Галерея</a></li>
-                    <li><a href="cabinet.html">Личный кабинет</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-contact">
+            <div class="footer-section">
                 <h3>Контакты</h3>
-                <p><i class="fas fa-map-marker-alt"></i> г. Красноярск, ул. Красивая, 15</p>
-                <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
-                <p><i class="fas fa-envelope"></i> info@beautylife.ru</p>
-                <p><i class="fas fa-clock"></i> Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00</p>
+                <p><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">г. Москва, ул. Красивая, 15</span></p>
+                <p><i class="fas fa-phone"></i> <span id="footerPhone">+7 (999) 123-45-67</span></p>
+                <p><i class="fas fa-envelope"></i> <span id="footerEmail">info@beautylife.ru</span></p>
+            </div>
+            <div class="footer-section">
+                <h3>Часы работы</h3>
+                <p id="footerHours">Пн-Пт: 9:00 - 21:00<br>Сб-Вс: 10:00 - 20:00</p>
             </div>
         </div>
-        
         <div class="footer-bottom">
-            <p>&copy; 2025 Beauty Life. Все права защищены.</p>
+            <p>&copy; <span id="currentYear"></span> <span id="footerOrgName2">Beauty Life</span>. Все права защищены.</p>
         </div>
+    
+        <script>
+            // Загрузка информации об организации
+            document.addEventListener('DOMContentLoaded', function() {
+                const orgInfo = JSON.parse(localStorage.getItem('beautyLifeOrgInfo')) || {
+                    name: 'Beauty Life',
+                    address: 'г. Москва, ул. Красивая, 15',
+                    phone: '+7 (999) 123-45-67',
+                    email: 'info@beautylife.ru',
+                    hours: 'Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00'
+                };
+    
+                // Обновляем данные в футере
+                document.getElementById('footerOrgName').textContent = orgInfo.name;
+                document.getElementById('footerOrgName2').textContent = orgInfo.name;
+                document.getElementById('footerAddress').textContent = orgInfo.address;
+                document.getElementById('footerPhone').textContent = orgInfo.phone;
+                document.getElementById('footerEmail').textContent = orgInfo.email;
+                document.getElementById('footerHours').innerHTML = orgInfo.hours.replace(',', '<br>');
+    
+                // Текущий год
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+            });
+        </script>
     </footer>
 </body>
 </html>

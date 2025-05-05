@@ -26,7 +26,6 @@
             color: var(--dark);
         }
         
-        /* Хедер */
         header {
             background-color: var(--light);
             box-shadow: 0 2px 20px rgba(0,0,0,0.08);
@@ -61,10 +60,9 @@
             align-items: center;
             justify-content: center;
             color: var(--light);
-            font-size: 20px;
-            font-weight: 700;
-            margin-right: 12px;
-            box-shadow: 0 4px 15px rgba(255,107,129,0.3);
+            font-size: 30px;
+            font-weight: bold;
+            margin-right: 25px;
         }
         
         .brand-name {
@@ -102,13 +100,46 @@
             transform: scale(1.1);
         }
         
-        /* Основное содержимое */
         .cabinet-container {
             width: 90%;
             max-width: 1200px;
             margin: 100px auto 50px;
         }
         
+        /* Стили для уведомления о платежных методах */
+        .payment-notification {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            width: 90%;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .notification-content i {
+            color: #ffc107;
+            font-size: 24px;
+            margin-top: 2px;
+        }
+
+        .notification-content p {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .notification-content p:last-child {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
         .user-section {
             display: flex;
             gap: 40px;
@@ -146,6 +177,12 @@
         .user-name {
             font-size: 24px;
             font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .user-fullname {
+            color: #666;
+            font-size: 16px;
             margin-bottom: 5px;
         }
         
@@ -305,7 +342,6 @@
             color: #666;
         }
         
-        /* Футер */
         footer {
             background: linear-gradient(135deg, #222 0%, #111 100%);
             color: var(--light);
@@ -364,7 +400,6 @@
     </style>
 </head>
 <body>
-    <!-- Шапка с логотипом -->
     <header>
         <div class="header-container">
             <a href="index.html" class="logo">
@@ -381,6 +416,17 @@
     </header>
 
     <main class="cabinet-container">
+        <!-- Уведомление о платежных методах -->
+        <div class="payment-notification">
+            <div class="notification-content">
+                <i class="fas fa-exclamation-circle"></i>
+                <div>
+                    <p>К сожалению, у нас не предусмотрены методы оплаты, подходящие для вашего региона.</p>
+                    <p>Пожалуйста, свяжитесь с нами если вам необходима консультация или специальные условия.</p>
+                </div>
+            </div>
+        </div>
+
         <!-- Кнопка возврата на главную -->
         <div style="margin-bottom: 20px;">
             <a href="index.html" class="btn" style="display: inline-flex; align-items: center;">
@@ -394,7 +440,8 @@
                 <div class="user-header">
                     <div class="user-avatar" id="userAvatar">JL</div>
                     <div>
-                        <div class="user-name" id="userName">Иван Иванов</div>
+                        <div class="user-name" id="userName">Beauty Life</div>
+                        <div class="user-fullname" id="userFullName"></div>
                         <div class="user-email" id="userEmail">ivan@example.com</div>
                     </div>
                 </div>
@@ -417,59 +464,52 @@
                 </button>
             </div>
             
-            <!-- Форма новой записи -->
-            <div class="new-order-card">
-                <h3 class="section-title">Новая запись</h3>
-                <form id="newOrderForm">
-                    <div class="form-group">
-                        <label for="service">Услуга</label>
-                        <select id="service" required>
-                            <option value="">Выберите услугу</option>
-                            <option value="Женская стрижка">Женская стрижка</option>
-                            <option value="Мужская стрижка">Мужская стрижка</option>
-                            <option value="Окрашивание волос">Окрашивание волос</option>
-                            <option value="Мелирование">Мелирование</option>
-                            <option value="Классический маникюр">Классический маникюр</option>
-                            <option value="Аппаратный маникюр">Аппаратный маникюр</option>
-                            <option value="SPA-педикюр">SPA-педикюр</option>
-                            <option value="Чистка лица">Чистка лица</option>
-                            <option value="Массаж лица">Массаж лица</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="orderDate">Дата</label>
-                        <input type="date" id="orderDate" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="orderTime">Время</label>
-                        <select id="orderTime" required>
-                            <option value="">Выберите время</option>
-                            <option value="10:00">10:00</option>
-                            <option value="11:00">11:00</option>
-                            <option value="12:00">12:00</option>
-                            <option value="13:00">13:00</option>
-                            <option value="14:00">14:00</option>
-                            <option value="15:00">15:00</option>
-                            <option value="16:00">16:00</option>
-                            <option value="17:00">17:00</option>
-                            <option value="18:00">18:00</option>
-                            <option value="19:00">19:00</option>
-                            <option value="20:00">20:00</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="comments">Комментарий</label>
-                        <input type="text" id="comments" placeholder="Ваши пожелания">
-                    </div>
-                    
-                    <button type="submit" class="btn btn-block">
-                        <i class="fas fa-calendar-check"></i> Записаться
-                    </button>
-                </form>
-            </div>
+<!-- Форма новой записи -->
+<div class="new-order-card">
+    <h3 class="section-title">Новая запись</h3>
+    <form id="newOrderForm">
+        <div class="form-group">
+            <label for="service">Услуга</label>
+            <select id="service" required>
+                <option value="">Выберите услугу</option>
+                <!-- Опции будут заполнены JavaScript -->
+            </select>
+            <div id="serviceDescriptionContainer" style="margin-top: 10px; padding: 10px; background: #f5f5f5; border-radius: 5px; display: none;"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="orderDate">Дата</label>
+            <input type="date" id="orderDate" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="orderTime">Время</label>
+            <select id="orderTime" required>
+                <option value="">Выберите время</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+                <option value="18:00">18:00</option>
+                <option value="19:00">19:00</option>
+                <option value="20:00">20:00</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="comments">Комментарий</label>
+            <input type="text" id="comments" placeholder="Ваши пожелания">
+        </div>
+        
+        <button type="submit" class="btn btn-block">
+            <i class="fas fa-calendar-check"></i> Записаться
+        </button>
+    </form>
+</div>
         </div>
         
         <!-- Список записей -->
@@ -485,257 +525,165 @@
     <footer>
         <div class="footer-container">
             <div class="footer-section">
-                <h3>О салоне</h3>
-                <p>Beauty Life - современный салон красоты с индивидуальным подходом к каждому клиенту.</p>
-            </div>
+                <h3>О салоне</h3>   
+                <p id="footerAbout">Beauty Life - современный салон красоты с индивидуальным подходом к каждому клиенту.</p>
+            </div>`
             <div class="footer-section">
                 <h3>Контакты</h3>
-                <p><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Красивая, 15</p>
-                <p><i class="fas fa-phone"></i> +7 (999) 123-45-67</p>
-                <p><i class="fas fa-envelope"></i> info@beautylife.ru</p>
+                <p><i class="fas fa-map-marker-alt"></i> <span id="footerAddress">г. Москва, ул. Красивая, 15</span></p>
+                <p><i class="fas fa-phone"></i> <span id="footerPhone">+7 (999) 123-45-67</span></p>
+                <p><i class="fas fa-envelope"></i> <span id="footerEmail">info@beautylife.ru</span></p>
             </div>
             <div class="footer-section">
                 <h3>Часы работы</h3>
-                <p>Пн-Пт: 9:00 - 21:00</p>
-                <p>Сб-Вс: 10:00 - 20:00</p>
+                <p id="footerHours">Пн-Пт: 9:00 - 21:00<br>Сб-Вс: 10:00 - 20:00</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 Beauty Life. Все права защищены.</p>
+            <p>&copy; <span id="currentYear"></span> Beauty Life. Все права защищены.</p>
         </div>
+    
+        <script>
+            // Загрузка информации об организации
+            document.addEventListener('DOMContentLoaded', function() {
+                const orgInfo = JSON.parse(localStorage.getItem('beautyLifeOrgInfo')) || {
+                    name: 'Beauty Life',
+                    address: 'г. Москва, ул. Красивая, 15',
+                    phone: '+7 (999) 123-45-67',
+                    email: 'info@beautylife.ru',
+                    hours: 'Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00'
+                };
+    
+                // Обновляем данные в футере
+                document.getElementById('footerAddress').textContent = orgInfo.address;
+                document.getElementById('footerPhone').textContent = orgInfo.phone;
+                document.getElementById('footerEmail').textContent = orgInfo.email;
+                document.getElementById('footerHours').innerHTML = orgInfo.hours.replace(',', '<br>');
+                document.getElementById('currentYear').textContent = new Date().getFullYear();
+            });
+        </script>
     </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // 1. Проверка авторизации
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            
             if (!currentUser) {
                 window.location.href = 'login.html';
                 return;
             }
-            
-            // Заполняем данные пользователя
-            document.getElementById('userName').textContent = currentUser.name;
+        
+            // 2. Загрузка данных пользователя
+            document.getElementById('userName').textContent = 'Beauty Life';
+            if (currentUser.firstName && currentUser.lastName) {
+                document.getElementById('userFullName').textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+            }
             document.getElementById('userEmail').textContent = currentUser.email;
-            document.getElementById('userAvatar').textContent = currentUser.name.split(' ').map(n => n[0]).join('');
-            
-            if (currentUser.phone) {
-                document.getElementById('userPhone').textContent = currentUser.phone;
-            }
-            
-            if (currentUser.regDate) {
-                document.getElementById('regDate').textContent = currentUser.regDate;
-            } else {
-                // Устанавливаем дату регистрации, если ее нет
-                const today = new Date();
-                const formattedDate = `${today.getDate().toString().padStart(2, '0')}.${(today.getMonth()+1).toString().padStart(2, '0')}.${today.getFullYear()}`;
-                document.getElementById('regDate').textContent = formattedDate;
+            document.getElementById('userAvatar').textContent = currentUser.firstName ? 
+                `${currentUser.firstName[0]}${currentUser.lastName[0]}` : 'BL';
+        
+            // 3. Загрузка услуг
+            function loadServicesForBooking() {
+                const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+                const select = document.getElementById('service');
                 
-                // Сохраняем дату регистрации
-                currentUser.regDate = formattedDate;
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
-                // Обновляем в общем списке пользователей
-                const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
-                const userIndex = users.findIndex(u => u.email === currentUser.email);
-                if (userIndex !== -1) {
-                    users[userIndex].regDate = formattedDate;
-                    localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
-                }
+                services.forEach(service => {
+                    const option = new Option(
+                        `${service.name} - ${service.price} руб.`,
+                        service.id
+                    );
+                    option.dataset.description = service.description;
+                    select.add(option);
+                });
+        
+                select.addEventListener('change', function() {
+                    const desc = this.options[this.selectedIndex]?.dataset.description;
+                    const descContainer = document.getElementById('serviceDescriptionContainer');
+                    if (descContainer) {
+                        descContainer.textContent = desc || '';
+                        descContainer.style.display = desc ? 'block' : 'none';
+                    }
+                });
             }
-            
-            // Загружаем записи
-            loadAppointments(currentUser.email);
-            
-            // Обработчик формы новой записи
+        
+            // 4. Обработка формы записи
             document.getElementById('newOrderForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                const service = document.getElementById('service').value;
+                const serviceId = document.getElementById('service').value;
                 const date = document.getElementById('orderDate').value;
                 const time = document.getElementById('orderTime').value;
-                const comments = document.getElementById('comments').value;
                 
-                if (!service || !date || !time) {
-                    alert('Пожалуйста, заполните все обязательные поля');
+                if (!serviceId || !date || !time) {
+                    alert('Заполните все обязательные поля!');
                     return;
                 }
+        
+                const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+                const service = services.find(s => s.id === serviceId);
                 
-                // Форматируем дату
-                const formattedDate = new Date(date).toLocaleDateString('ru-RU');
-                const fullDate = `${formattedDate} ${time}`;
-                
-                // Определяем цену услуги
-                const servicePrices = {
-                    'Женская стрижка': '1 500 руб.',
-                    'Мужская стрижка': '800 руб.',
-                    'Окрашивание волос': '2 500 руб.',
-                    'Мелирование': '3 000 руб.',
-                    'Классический маникюр': '1 200 руб.',
-                    'Аппаратный маникюр': '1 500 руб.',
-                    'SPA-педикюр': '1 800 руб.',
-                    'Чистка лица': '2 000 руб.',
-                    'Массаж лица': '1 500 руб.'
-                };
-                
-                const price = servicePrices[service] || 'Договорная';
-                
-                // Добавляем запись
+                if (!service) {
+                    alert('Ошибка: услуга не найдена');
+                    return;
+                }
+        
+                // Сохранение записи
                 const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
                 const userIndex = users.findIndex(u => u.email === currentUser.email);
                 
-                if (userIndex !== -1) {
-                    if (!users[userIndex].appointments) {
-                        users[userIndex].appointments = [];
-                    }
-                    
-                    const newAppointment = {
-                        service: service,
-                        date: fullDate,
-                        price: price,
-                        status: 'Новый',
-                        comments: comments || ''
-                    };
-                    
-                    users[userIndex].appointments.push(newAppointment);
-                    localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
-                    
-                    // Обновляем текущего пользователя
-                    currentUser.appointments = users[userIndex].appointments;
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                    
-                    // Очищаем форму
-                    document.getElementById('newOrderForm').reset();
-                    
-                    // Показываем уведомление
-                    alert(`Вы успешно записались на "${service}" на ${fullDate}`);
-                    
-                    // Обновляем список записей
-                    loadAppointments(currentUser.email);
+                if (userIndex === -1) {
+                    alert('Ошибка: пользователь не найден');
+                    return;
                 }
+        
+                const newAppointment = {
+                    serviceId: service.id,
+                    service: service.name,
+                    date: `${new Date(date).toLocaleDateString('ru-RU')} ${time}`,
+                    price: `${service.price} руб.`,
+                    status: 'Новый'
+                };
+        
+                if (!users[userIndex].appointments) {
+                    users[userIndex].appointments = [];
+                }
+        
+                users[userIndex].appointments.push(newAppointment);
+                localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+                
+                alert(`Вы записаны на ${service.name}!`);
+                window.location.reload();
             });
+        
+            // 5. Инициализация
+            loadServicesForBooking();
+            loadAppointments(currentUser.email);
             
-            // Кнопка выхода
-            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+            // 6. Обработчики кнопок
+            document.getElementById('logoutBtn')?.addEventListener('click', function(e) {
                 e.preventDefault();
-                if (confirm('Вы действительно хотите выйти?')) {
-                    localStorage.removeItem('currentUser');
-                    window.location.href = 'index.html';
-                }
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
             });
             
-            // Кнопка редактирования профиля
-            document.getElementById('editProfileBtn').addEventListener('click', function() {
+            document.getElementById('editProfileBtn')?.addEventListener('click', function() {
                 const newPhone = prompt('Введите ваш телефон:', currentUser.phone || '');
                 if (newPhone !== null) {
                     currentUser.phone = newPhone;
                     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                    
-                    // Обновляем в общем списке пользователей
-                    const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
-                    const userIndex = users.findIndex(u => u.email === currentUser.email);
-                    if (userIndex !== -1) {
-                        users[userIndex].phone = newPhone;
-                        localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
-                    }
-                    
                     document.getElementById('userPhone').textContent = newPhone;
-                    alert('Телефон успешно обновлен');
                 }
             });
         });
         
-        function loadAppointments(userEmail) {
-            const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
-            const user = users.find(u => u.email === userEmail);
-            const appointmentsList = document.getElementById('appointmentsList');
-            
-            if (!user || !user.appointments || user.appointments.length === 0) {
-                appointmentsList.innerHTML = '<p class="no-appointments">У вас пока нет записей</p>';
-                document.getElementById('appointmentsCount').textContent = '0';
-                return;
-            }
-            
-            // Обновляем количество записей
-            document.getElementById('appointmentsCount').textContent = user.appointments.length;
-            
-            // Сортируем записи по дате (новые сначала)
-            const sortedAppointments = [...user.appointments].sort((a, b) => {
-                return new Date(b.date.split(' ')[0].split('.').reverse().join('-')) - 
-                       new Date(a.date.split(' ')[0].split('.').reverse().join('-'));
-            });
-            
-            let html = `
-                <table class="appointments-table">
-                    <thead>
-                        <tr>
-                            <th>Услуга</th>
-                            <th>Дата и время</th>
-                            <th>Стоимость</th>
-                            <th>Статус</th>
-                            <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-            `;
-            
-            sortedAppointments.forEach((app, index) => {
-                const statusClass = `status-${app.status ? app.status.toLowerCase() : 'confirmed'}`;
-                
-                html += `
-                    <tr>
-                        <td>${app.service}</td>
-                        <td>${app.date}</td>
-                        <td>${app.price}</td>
-                        <td><span class="${statusClass}">${app.status || 'Подтверждено'}</span></td>
-                        <td>
-                            ${app.status === 'Новый' || !app.status ? `
-                                <button class="cancel-btn" data-index="${index}">Отменить</button>
-                            ` : ''}
-                        </td>
-                    </tr>
-                `;
-            });
-            
-            html += `
-                    </tbody>
-                </table>
-            `;
-            
-            appointmentsList.innerHTML = html;
-            
-            // Добавляем обработчики для кнопок отмены
-            document.querySelectorAll('.cancel-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = parseInt(this.getAttribute('data-index'));
-                    cancelAppointment(userEmail, index);
-                });
-            });
+        // 7. Ваши существующие функции (оставьте без изменений)
+        function loadAppointments(email) {
+            /* ... ваш текущий код ... */
         }
         
-        function cancelAppointment(userEmail, index) {
-            if (!confirm('Вы действительно хотите отменить эту запись?')) return;
-            
-            const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
-            const userIndex = users.findIndex(u => u.email === userEmail);
-            
-            if (userIndex !== -1 && users[userIndex].appointments && users[userIndex].appointments[index]) {
-                // Помечаем как отмененное
-                users[userIndex].appointments[index].status = 'Отменено';
-                localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
-                
-                // Обновляем текущего пользователя
-                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-                if (currentUser && currentUser.email === userEmail) {
-                    currentUser.appointments = users[userIndex].appointments;
-                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                }
-                
-                // Перезагружаем список
-                loadAppointments(userEmail);
-                alert('Запись успешно отменена');
-            }
+        function cancelAppointment(email, index) {
+            /* ... ваш текущий код ... */
         }
-    </script>
+        </script>
 </body>
 </html>

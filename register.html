@@ -6,7 +6,6 @@
     <title>Beauty Life - Регистрация</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Общие стили */
         :root {
             --primary: #ff6b81;
             --secondary: #ff8e53;
@@ -30,7 +29,6 @@
             min-height: 100vh;
         }
         
-        /* Логотип в шапке */
         .auth-header {
             padding: 25px 0;
             background-color: var(--light);
@@ -72,7 +70,6 @@
             -webkit-text-fill-color: transparent;
         }
         
-        /* Основная форма */
         .auth-container {
             display: flex;
             justify-content: center;
@@ -174,7 +171,6 @@
             text-decoration: underline;
         }
         
-        /* Футер */
         .footer {
             background: linear-gradient(135deg, #222 0%, #111 100%);
             color: var(--light);
@@ -209,8 +205,12 @@
             <h2 class="auth-title">Регистрация</h2>
             <form id="registerForm">
                 <div class="form-group">
-                    <label for="name">Имя</label>
-                    <input type="text" id="name" required placeholder="Ваше имя">
+                    <label for="firstName">Имя</label>
+                    <input type="text" id="firstName" required placeholder="Ваше имя">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Фамилия</label>
+                    <input type="text" id="lastName" required placeholder="Ваша фамилия">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
@@ -242,69 +242,59 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Инициализация хранилища, если оно пустое
             if (!localStorage.getItem('beautyLifeUsers')) {
                 localStorage.setItem('beautyLifeUsers', JSON.stringify([]));
             }
 
-            // Обработка формы регистрации
             document.getElementById('registerForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
-                // Получаем данные из формы
-                const name = document.getElementById('name').value;
+                const firstName = document.getElementById('firstName').value;
+                const lastName = document.getElementById('lastName').value;
                 const email = document.getElementById('email').value;
                 const phone = document.getElementById('phone').value;
                 const password = document.getElementById('password').value;
                 const confirmPassword = document.getElementById('confirmPassword').value;
                 
-                // Проверка совпадения паролей
                 if (password !== confirmPassword) {
                     alert('Пароли не совпадают!');
                     return;
                 }
                 
-                // Проверка минимальной длины пароля
                 if (password.length < 6) {
                     alert('Пароль должен содержать минимум 6 символов!');
                     return;
                 }
                 
-                // Получаем текущий список пользователей
                 const users = JSON.parse(localStorage.getItem('beautyLifeUsers'));
                 
-                // Проверяем, есть ли уже пользователь с таким email
                 const userExists = users.some(user => user.email === email);
                 if (userExists) {
                     alert('Пользователь с таким email уже зарегистрирован!');
                     return;
                 }
                 
-                // Создаем нового пользователя
                 const newUser = {
-                    id: Date.now(), // Уникальный ID на основе времени
-                    name: name,
-                    email: email,
-                    phone: phone,
-                    password: password,
-                    regDate: new Date().toLocaleDateString('ru-RU'),
-                    appointments: []
-                };
+    id: 'user-' + Date.now().toString(), // Генерируем уникальный ID с префиксом
+    firstName: firstName,
+    lastName: lastName,
+    email: email,
+    phone: phone,
+    password: password,
+    regDate: new Date().toLocaleDateString('ru-RU'),
+    appointments: []
+};
                 
-                // Добавляем нового пользователя в массив
                 users.push(newUser);
-                
-                // Сохраняем обновленный массив пользователей
                 localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
                 
-                // Сохраняем текущего пользователя
                 localStorage.setItem('currentUser', JSON.stringify({
-                    name: name,
+                    firstName: firstName,
+                    lastName: lastName,
                     email: email,
                     phone: phone
                 }));
                 
-                // Перенаправляем в личный кабинет
                 alert('Регистрация прошла успешно!');
                 window.location.href = 'cabinet.html';
             });

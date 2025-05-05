@@ -197,7 +197,7 @@
 <body>
 <header class="auth-header">
     <div class="logo-container">
-        <a href="Главная страница.html" class="logo">
+        <a href="index.html" class="logo">
             <div class="logo-icon">BL</div>
             <span class="brand-name">Beauty Life</span>
         </a>
@@ -223,13 +223,12 @@
         </form>
     </div>
 </main>
-
-<footer class="footer">
-    <p>&copy; 2023 Beauty Life. Все права защищены.</p>
-</footer>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Проверяем, есть ли сохраненная корзина для оформления
+        const pendingCart = localStorage.getItem('pendingCart');
+        const redirectAfterLogin = localStorage.getItem('redirectAfterLogin');
+        
         // Обработка формы входа
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -237,23 +236,29 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
             
-            // Получаем список пользователей
             const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
-                // Сохраняем данные текущего пользователя
                 localStorage.setItem('currentUser', JSON.stringify({
                     name: user.name,
                     email: user.email,
                     phone: user.phone
                 }));
                 
-                // Перенаправляем в личный кабинет или админ-панель
-                if (email === 'admin@beautylife.ru') {
-                    window.location.href = 'admin.html';
+                // Перенаправляем в зависимости от роли и наличия корзины
+                if (redirectAfterLogin === 'true') {
+                    if (email === 'admin@beautylife.ru') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'index.html';
+                    }
                 } else {
-                    window.location.href = 'cabinet.html';
+                    if (email === 'admin@beautylife.ru') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        window.location.href = 'cabinet.html';
+                    }
                 }
             } else {
                 alert('Неверный email или пароль');
@@ -261,5 +266,8 @@
         });
     });
 </script>
+<footer class="footer">
+    <p>&copy; 2023 Beauty Life. Все права защищены.</p>
+</footer>
 </body>
 </html>

@@ -6,10 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (currentUser) {
         if (currentUser.email === 'admin@beautylife.ru') {
             loginBtn.innerHTML = '<i class="fas fa-user-shield"></i> Админ';
+            loginBtn.href = 'admin.html';
         } else {
             loginBtn.innerHTML = '<i class="fas fa-user"></i> Кабинет';
+            loginBtn.href = 'cabinet.html';
         }
-        loginBtn.href = currentUser.email === 'admin@beautylife.ru' ? 'admin.html' : 'cabinet.html';
     } else {
         loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Войти';
         loginBtn.href = 'login.html';
@@ -31,6 +32,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const serviceName = serviceRow.querySelector('.price-service').textContent;
             const servicePrice = serviceRow.querySelector('.price-cost').textContent;
             
+            // Получаем полное описание услуги
+            const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+            const service = services.find(s => s.name === serviceName);
+            const serviceDescription = service ? service.description : '';
+            
             const date = prompt('Введите дату и время записи (например, 15.05.2023 14:00):');
             if (!date) return;
             
@@ -43,7 +49,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
                 
                 users[userIndex].appointments.push({
+                    serviceId: service ? service.id : '',
                     service: serviceName,
+                    description: serviceDescription,
                     price: servicePrice,
                     date: date,
                     status: 'Новый'

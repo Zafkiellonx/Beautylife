@@ -199,6 +199,116 @@
             color: white;
         }
         
+        /* Стили для секции управления организацией */
+        .admin-section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 40px;
+        }
+
+        .org-info-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .org-info-card p {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .org-edit-form {
+            background: #f5f5f5;
+            padding: 25px;
+            border-radius: 8px;
+        }
+
+        .org-edit-form .form-group {
+            margin-bottom: 20px;
+        }
+
+        .org-edit-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .org-edit-form input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255,107,129,0.3);
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .close-modal:hover {
+            color: var(--primary);
+        }
+
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -273,66 +383,212 @@
                 <tbody id="ordersTableBody"></tbody>
             </table>
         </div>
+
+        <!-- Секция управления организацией -->
+        <section class="admin-section">
+            <h2>Управление информацией об организации</h2>
+            
+            <div class="org-info-card">
+                <h3>Текущая информация</h3>
+                <div id="currentOrgInfo">
+                    <p><strong>Название:</strong> <span id="orgNameDisplay">Beauty Life</span></p>
+                    <p><strong>Адрес:</strong> <span id="orgAddressDisplay">г. Москва, ул. Красивая, 15</span></p>
+                    <p><strong>Телефон:</strong> <span id="orgPhoneDisplay">+7 (999) 123-45-67</span></p>
+                    <p><strong>Email:</strong> <span id="orgEmailDisplay">info@beautylife.ru</span></p>
+                    <p><strong>Часы работы:</strong> <span id="orgHoursDisplay">Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00</span></p>
+                </div>
+            </div>
+
+            <div class="org-edit-form">
+                <h3>Редактировать информацию</h3>
+                <form id="orgInfoForm">
+                    <div class="form-group">
+                        <label for="orgName">Название организации</label>
+                        <input type="text" id="orgName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgAddress">Адрес</label>
+                        <input type="text" id="orgAddress" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgPhone">Телефон</label>
+                        <input type="tel" id="orgPhone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgEmail">Email</label>
+                        <input type="email" id="orgEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="orgHours">Часы работы</label>
+                        <input type="text" id="orgHours" required>
+                    </div>
+                    <button type="submit" class="btn">Сохранить изменения</button>
+                </form>
+            </div>
+        </section>
+        
+        <!-- Секция управления услугами -->
+        <section class="admin-section">
+            <h2>Управление услугами</h2>
+            
+            <div class="services-list">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Название</th>
+                            <th>Описание</th>
+                            <th>Цена</th>
+                            <th>Категория</th>
+                            <th>Длительность</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody"></tbody>
+                </table>
+                
+                <button class="btn" id="addServiceBtn" style="margin-top: 20px;">
+                    <i class="fas fa-plus"></i> Добавить услугу
+                </button>
+            </div>
+        </section>
     </main>
 
+    <!-- Модальное окно для добавления/редактирования услуги -->
+    <div id="serviceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 id="modalTitle">Добавить новую услугу</h3>
+            <form id="serviceForm">
+                <input type="hidden" id="serviceId">
+                <div class="form-group">
+                    <label for="serviceName">Название услуги</label>
+                    <input type="text" id="serviceName" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceDescription">Описание</label>
+                    <textarea id="serviceDescription" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="servicePrice">Цена (руб.)</label>
+                    <input type="number" id="servicePrice" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceCategory">Категория</label>
+                    <select id="serviceCategory" required>
+                        <option value="Парикмахерские">Парикмахерские</option>
+                        <option value="Маникюр">Маникюр</option>
+                        <option value="Педикюр">Педикюр</option>
+                        <option value="Косметология">Косметология</option>
+                        <option value="Массаж">Массаж</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="serviceDuration">Длительность (мин.)</label>
+                    <input type="number" id="serviceDuration" required>
+                </div>
+                <button type="submit" class="btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
+
     <script>
-        // Инициализация тестовых данных
+        // Инициализация хранилища
         function initializeTestData() {
             if (!localStorage.getItem('beautyLifeUsers')) {
                 const testData = [
                     {
                         id: "admin-1",
-                        name: "Admin",
+                        firstName: "Admin",
+                        lastName: "Adminov",
                         email: "admin@beautylife.ru",
                         password: "admin123",
-                        appointments: [
-                            {
-                                service: "Женская стрижка",
-                                date: "01.01.2023 14:00",
-                                price: "1500 руб.",
-                                status: "Новый"
-                            },
-                            {
-                                service: "Маникюр",
-                                date: "02.01.2023 15:00",
-                                price: "1200 руб.",
-                                status: "Подтверждено"
-                            }
-                        ]
+                        appointments: [],
+                        regDate: new Date().toLocaleDateString('ru-RU')
                     }
                 ];
                 localStorage.setItem('beautyLifeUsers', JSON.stringify(testData));
             }
             
+            if (!localStorage.getItem('beautyLifeOrgInfo')) {
+                const orgInfo = {
+                    name: 'Beauty Life',
+                    address: 'г. Москва, ул. Красивая, 15',
+                    phone: '+7 (999) 123-45-67',
+                    email: 'info@beautylife.ru',
+                    hours: 'Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00'
+                };
+                localStorage.setItem('beautyLifeOrgInfo', JSON.stringify(orgInfo));
+            }
+            
+            if (!localStorage.getItem('beautyLifeServices')) {
+                const defaultServices = [
+                    {
+                        id: 'service-1',
+                        name: 'Женская стрижка',
+                        description: 'Стрижка с учетом особенностей вашего типа волос и формы лица',
+                        price: 1500,
+                        category: 'Парикмахерские',
+                        duration: 60
+                    },
+                    {
+                        id: 'service-2',
+                        name: 'Мужская стрижка',
+                        description: 'Классическая или современная стрижка с оформлением бороды',
+                        price: 800,
+                        category: 'Парикмахерские',
+                        duration: 40
+                    },
+                    {
+                        id: 'service-3',
+                        name: 'Классический маникюр',
+                        description: 'Обрезной маникюр с покрытием лаком',
+                        price: 1200,
+                        category: 'Маникюр',
+                        duration: 60
+                    }
+                ];
+                localStorage.setItem('beautyLifeServices', JSON.stringify(defaultServices));
+            }
+            
             if (!localStorage.getItem('currentUser')) {
                 localStorage.setItem('currentUser', JSON.stringify({
-                    name: "Admin",
+                    firstName: "Admin",
+                    lastName: "Adminov",
                     email: "admin@beautylife.ru"
                 }));
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            initializeTestData();
-            
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-            
-            if (!currentUser || currentUser.email !== 'admin@beautylife.ru') {
-                window.location.href = 'login.html';
-                return;
-            }
-            
-            document.getElementById('logoutBtn').addEventListener('click', function() {
-                localStorage.removeItem('currentUser');
-                window.location.href = 'index.html';
-            });
-            
-            loadAdminData();
-        });
-        
+        // Загрузка информации об организации
+        function loadOrgInfo() {
+            const orgInfo = JSON.parse(localStorage.getItem('beautyLifeOrgInfo')) || {
+                name: 'Beauty Life',
+                address: 'г. Москва, ул. Красивая, 15',
+                phone: '+7 (999) 123-45-67',
+                email: 'info@beautylife.ru',
+                hours: 'Пн-Пт: 9:00-21:00, Сб-Вс: 10:00-20:00'
+            };
+
+            // Отображаем текущую информацию
+            document.getElementById('orgNameDisplay').textContent = orgInfo.name;
+            document.getElementById('orgAddressDisplay').textContent = orgInfo.address;
+            document.getElementById('orgPhoneDisplay').textContent = orgInfo.phone;
+            document.getElementById('orgEmailDisplay').textContent = orgInfo.email;
+            document.getElementById('orgHoursDisplay').textContent = orgInfo.hours;
+
+            // Заполняем форму редактирования
+            document.getElementById('orgName').value = orgInfo.name;
+            document.getElementById('orgAddress').value = orgInfo.address;
+            document.getElementById('orgPhone').value = orgInfo.phone;
+            document.getElementById('orgEmail').value = orgInfo.email;
+            document.getElementById('orgHours').value = orgInfo.hours;
+
+            return orgInfo;
+        }
+
+        // Загрузка данных администратора
         function loadAdminData() {
             const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
-            console.log("Текущие данные:", users);
             
             let allOrders = [];
             let totalRevenue = 0;
@@ -343,7 +599,7 @@
                     user.appointments.forEach((order, index) => {
                         allOrders.push({
                             ...order,
-                            userName: user.name,
+                            userName: user.firstName + ' ' + user.lastName,
                             userEmail: user.email,
                             userId: user.id,
                             orderIndex: index
@@ -427,37 +683,213 @@
         }
         
         function updateOrderStatus(userId, orderIndex, newStatus) {
-            const users = JSON.parse(localStorage.getItem('beautyLifeUsers'));
-            const userIndex = users.findIndex(u => u.id == userId);
+    try {
+        const users = JSON.parse(localStorage.getItem('beautyLifeUsers')) || [];
+        const userIndex = users.findIndex(u => u.id === userId);
+        
+        if (userIndex === -1) {
+            throw new Error(`Пользователь с ID ${userId} не найден`);
+        }
+        
+        if (!users[userIndex].appointments || !users[userIndex].appointments[orderIndex]) {
+            throw new Error("Запись не найдена");
+        }
+        
+        // Обновляем статус
+        users[userIndex].appointments[orderIndex].status = newStatus;
+        
+        // Сохраняем изменения
+        localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
+        
+        // Обновляем текущего пользователя (если это его запись)
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser && currentUser.email === users[userIndex].email) {
+            currentUser.appointments = users[userIndex].appointments;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+        }
+        
+        // Обновляем таблицу
+        loadAdminData();
+        alert(`Статус успешно изменён на "${newStatus}"`);
+        
+    } catch (error) {
+        console.error("Ошибка обновления статуса:", error);
+        alert(error.message);
+    }
+}
+
+        // Загрузка списка услуг
+        function loadServices() {
+            const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+            const tbody = document.getElementById('servicesTableBody');
+            tbody.innerHTML = '';
             
-            if (userIndex !== -1 && 
-                users[userIndex].appointments && 
-                users[userIndex].appointments[orderIndex]) {
-                
-                console.log("Обновление статуса:", {
-                    userId,
-                    orderIndex,
-                    newStatus,
-                    before: users[userIndex].appointments[orderIndex]
+            services.forEach(service => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${service.name}</td>
+                    <td>${service.description}</td>
+                    <td>${service.price} руб.</td>
+                    <td>${service.category}</td>
+                    <td>${service.duration} мин.</td>
+                    <td>
+                        <button class="action-btn edit-service" data-id="${service.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn cancel-btn delete-service" data-id="${service.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            
+            // Обработчики для кнопок редактирования
+            document.querySelectorAll('.edit-service').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    editService(this.getAttribute('data-id'));
                 });
-                
-                users[userIndex].appointments[orderIndex].status = newStatus;
-                localStorage.setItem('beautyLifeUsers', JSON.stringify(users));
-                
-                console.log("После обновления:", users[userIndex].appointments[orderIndex]);
-                
-                loadAdminData();
-                alert(`Статус изменён на "${newStatus}"`);
-            } else {
-                alert("Ошибка: не удалось обновить статус. Проверьте консоль (F12)");
-                console.error("Ошибка обновления:", {
-                    users,
-                    userId,
-                    orderIndex,
-                    userFound: userIndex !== -1
+            });
+            
+            // Обработчики для кнопок удаления
+            document.querySelectorAll('.delete-service').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    deleteService(this.getAttribute('data-id'));
                 });
+            });
+        }
+
+        // Открытие модального окна для добавления услуги
+        document.getElementById('addServiceBtn').addEventListener('click', function() {
+            document.getElementById('modalTitle').textContent = 'Добавить новую услугу';
+            document.getElementById('serviceForm').reset();
+            document.getElementById('serviceId').value = '';
+            document.getElementById('serviceModal').style.display = 'block';
+        });
+
+        // Закрытие модального окна
+        document.querySelector('.close-modal').addEventListener('click', function() {
+            document.getElementById('serviceModal').style.display = 'none';
+        });
+
+        // Редактирование услуги
+        function editService(serviceId) {
+            const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+            const service = services.find(s => s.id === serviceId);
+            
+            if (service) {
+                document.getElementById('modalTitle').textContent = 'Редактировать услугу';
+                document.getElementById('serviceId').value = service.id;
+                document.getElementById('serviceName').value = service.name;
+                document.getElementById('serviceDescription').value = service.description;
+                document.getElementById('servicePrice').value = service.price;
+                document.getElementById('serviceCategory').value = service.category;
+                document.getElementById('serviceDuration').value = service.duration;
+                
+                document.getElementById('serviceModal').style.display = 'block';
             }
         }
+
+        // Удаление услуги
+        function deleteService(serviceId) {
+            if (confirm('Вы уверены, что хотите удалить эту услугу?')) {
+                const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+                const updatedServices = services.filter(s => s.id !== serviceId);
+                
+                localStorage.setItem('beautyLifeServices', JSON.stringify(updatedServices));
+                loadServices();
+                alert('Услуга успешно удалена');
+            }
+        }
+
+        // Обработка формы услуги
+        document.getElementById('serviceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const serviceId = document.getElementById('serviceId').value;
+            const name = document.getElementById('serviceName').value;
+            const description = document.getElementById('serviceDescription').value;
+            const price = parseInt(document.getElementById('servicePrice').value);
+            const category = document.getElementById('serviceCategory').value;
+            const duration = parseInt(document.getElementById('serviceDuration').value);
+            
+            const services = JSON.parse(localStorage.getItem('beautyLifeServices')) || [];
+            
+            if (serviceId) {
+                // Редактирование существующей услуги
+                const index = services.findIndex(s => s.id === serviceId);
+                if (index !== -1) {
+                    services[index] = {
+                        id: serviceId,
+                        name,
+                        description,
+                        price,
+                        category,
+                        duration
+                    };
+                }
+            } else {
+                // Добавление новой услуги
+                const newService = {
+                    id: 'service-' + Date.now(),
+                    name,
+                    description,
+                    price,
+                    category,
+                    duration
+                };
+                services.push(newService);
+            }
+            
+            localStorage.setItem('beautyLifeServices', JSON.stringify(services));
+            document.getElementById('serviceModal').style.display = 'none';
+            loadServices();
+            alert('Услуга успешно сохранена');
+        });
+
+        // Закрытие модального окна при клике вне его
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('serviceModal')) {
+                document.getElementById('serviceModal').style.display = 'none';
+            }
+        });
+
+        // Обработчик формы редактирования организации
+        document.getElementById('orgInfoForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const newOrgInfo = {
+                name: document.getElementById('orgName').value,
+                address: document.getElementById('orgAddress').value,
+                phone: document.getElementById('orgPhone').value,
+                email: document.getElementById('orgEmail').value,
+                hours: document.getElementById('orgHours').value
+            };
+            
+            localStorage.setItem('beautyLifeOrgInfo', JSON.stringify(newOrgInfo));
+            loadOrgInfo();
+            alert('Информация об организации успешно обновлена!');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeTestData();
+            
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser || currentUser.email !== 'admin@beautylife.ru') {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            });
+            
+            loadAdminData();
+            loadOrgInfo();
+            loadServices();
+        });
     </script>
 </body>
 </html>
